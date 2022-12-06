@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Styles/index.css">
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "poppins",sans-serif;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    
+}
+
+img,button{
+    cursor: pointer;
+    width: 120px;
+}
+.flex-div{
+    display: flex;
+    align-items: center;
+    height: 100px;
+   
+}
+
+nav{
+    padding: 10px 2%;
+    width: 100%;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    position:fixed;
+    top: 0;
+    z-index: 10;
+    border-radius: 10px;
+}
+.nav-left .menu-icon{
+    width: 22px;
+    margin-right: 28px;
+   
+}
+
+
+.nav-middle .LMS{
+    color: orangered;
+    font-size:30px;  
+} 
+
+.nav-right button{
+    margin-left: 15px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: #ccc;
+    
+}
+#sign, #login {
+    background-color: orangered;
+    padding: 10px 15px;
+    color: white;
+}
+#back{
+    display: block;
+    margin: auto;
+    width: 85%;
+    height: 80%;
+}
+
+/* Navbar End */
+</style>
+</head>
+<body>
+    
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <img src="https://www.masaischool.com/img/navbar/logo.svg" class="logo-icon">
+        </div>  
+        <div class="nav-middle" class="flex-div">
+          <h1 class="LMS">Student Management system</h1> 
+        </div>
+        <div class="nav-right" class="flex-div">
+          <a href="signup.html"><button id="sign"> SignUp</button></a> 
+            <a href="login.html"><button id="login">Login</button></a>   
+        </div>
+    </nav>
+
+    <img id="back" src="https://th.bing.com/th/id/R.0f0e3fabe9527067012f2392632602bb?rik=Dq7JopVsR0ePhQ&riu=http%3a%2f%2fcommunity.dynamics.com%2fcfs-file%2f__key%2fcommunityserver-blogs-components-weblogfiles%2f00-00-00-08-50%2fblog_2D00_22.gif&ehk=5Y0qrgmQygaUEVVGgQq35YOtZRlENxMukOmmb4n93mY%3d&risl=&pid=ImgRaw&r=0" alt="Not Found">
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      form {
+        width: 70%;
+        display: flex;
+        margin: auto;
+        margin-top: 2rem;
+        margin-bottom: 5rem;
+        padding: 30px 40px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      }
+      input {
+        display: block;
+        margin: 3px 3px;
+        align-items: center;
+        font-size: 20px;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      input::placeholder {
+        font-size: 15px;
+      }
+      #addLect {
+        width: 30%;
+        margin-left: 10px;
+        border-radius: 2px;
+        background-color: orangered;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        border: none;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin: auto;
+
+        font-size: 25px;
+      }
+      table,
+      th,
+      td {
+        margin: auto;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+      }
+      td {
+        text-align: center;
+        padding: 20px;
+      }
+      tr > th {
+        background-color: orangered;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        padding: 10px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="">
+      <input type="text" id="lect" placeholder="Lecture Details" />
+      <input type="submit" value="Add Lecture" id="addLect" />
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Lecture</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="body"></tbody>
+    </table>
+  </body>
+</html>
+
+<script>
+  let lectureData = JSON.parse(localStorage.getItem("lectureDetails")) || [];
+  class Lecture {
+    constructor(lecture) {
+      this.leclecture = lecture;
+    }
+
+    append(data) {
+      data.forEach((el, index) => {
+        let tr = document.createElement("tr");
+
+        let td1 = document.createElement("td");
+        td1.innerText = el;
+
+        let td2 = document.createElement("td");
+        td2.innerText = "Remove";
+        td2.addEventListener("click", function () {
+          deleteData(index);
+        });
+
+        tr.append(td1, td2);
+        document.getElementById("body").append(tr);
+      });
+    }
+  }
+
+  function deleteData(index) {
+    lectureData.splice(index, 1);
+    localStorage.setItem("lectureDetails", JSON.stringify(lectureData));
+    window.location.reload();
+  }
+
+  let addlect = () => {
+    let lec = document.querySelector("#lect").value;
+    lectureData.push(lec);
+    localStorage.setItem("lectureDetails", JSON.stringify(lectureData));
+  };
+
+  if (lectureData != "") {
+    let lec = document.querySelector("#lect").value;
+    let lectr = new Lecture(lec);
+    lectr.append(lectureData);
+  }
+
+  document.querySelector("form").addEventListener("submit", addlect);
+</script>

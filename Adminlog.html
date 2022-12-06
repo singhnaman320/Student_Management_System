@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin login</title>
+    <link rel="stylesheet" href="logsign.css" />
+  </head>
+
+  <body>
+    <img src="https://sso.masaischool.com/brand_dark.svg" alt="No Image Found">
+    <form id="formsec">
+      <h2>Admin Sign In</h2>
+    
+      <p>Username</p>
+      <input placeholder="Enter Username" type="text" id="user" />
+      <div id="shift">
+        <p>Password </p>
+        <a href="forgot.html">Forgot Password?</a>
+      </div>
+      
+      <input type="password" placeholder="Enter Password" id="pass">
+     
+      <!-- <input id="submit" type="submit" value="Sign Up" /> -->
+      <input id="sub" type="submit" value="SIGN IN"></input>
+      <div id="google">
+          <img id="image" src="https://sso.masaischool.com/google.svg" alt="No Image Found">
+          <p>CONTINUE WITH GOOGLE</p>
+      </div>
+      <p id="last">Don't have an account? <a href="./Adminsign.html">Sign Up</a></p>
+    </form>
+      <p id="end">© 2022 by Masai School Privacy Policy & Terms and Conditions</p>
+  </body>
+</html>
+
+<!-- <script src = "index.js"></script> -->
+
+<script>
+
+
+
+let arrfromLS= JSON.parse(localStorage.getItem("AdmMan")) || [];
+
+
+document.querySelector("form").addEventListener("submit", myLogin);
+function myLogin(event){
+event.preventDefault();
+
+
+
+let loginObj={ loginUser: document.querySelector("#user").value,
+               loginPass: document.querySelector("#pass").value };
+
+
+
+let flag= false;
+for(let i=0;i<arrfromLS.length;i++){
+  if(arrfromLS[i].personUser==loginObj.loginUser && arrfromLS[i].personPass==loginObj.loginPass){
+  flag=true;
+  break;
+  }
+}
+if(flag==true){
+  alert("Login Successfull");
+  localStorage.setItem("setsystem","offline");
+  window.location.href="./manage.html"
+}else{
+  alert("Wrong Credentials");
+  window.location.href="./Adminsign.html";
+}
+
+}
+</script>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      form {
+        width: 70%;
+        display: flex;
+        margin: auto;
+        margin-top: 2rem;
+        margin-bottom: 5rem;
+        padding: 30px 40px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      }
+      input {
+        display: block;
+        margin: 3px 3px;
+        align-items: center;
+        font-size: 20px;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      input::placeholder {
+        font-size: 15px;
+      }
+      #addAssi {
+        width: 30%;
+        margin-left: 10px;
+        border-radius: 2px;
+        background-color: orangered;
+        color: white;
+        border: none;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin: auto;
+
+        font-size: 25px;
+      }
+      table,
+      th,
+      td {
+        margin: auto;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+      }
+      td {
+        text-align: center;
+        padding: 20px;
+      }
+      tr > th {
+        background-color: orangered;
+        color: white;
+        padding: 10px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="">
+      <input type="text" id="assi" placeholder="Assignment Details" />
+      <input type="submit" value="Add Assignment" id="addAssi" />
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Assignment</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="body"></tbody>
+    </table>
+  </body>
+</html>
+
+<script>
+  let assignmentData =
+    JSON.parse(localStorage.getItem("assignmentDetails")) || [];
+  class Assignment {
+    constructor(assignmnet) {
+      this.assignmnet = assignmnet;
+    }
+
+    append(data) {
+      data.forEach((el, index) => {
+        let tr = document.createElement("tr");
+
+        let td1 = document.createElement("td");
+        td1.innerText = el;
+        console.log(el)
+
+        let td2 = document.createElement("td");
+        td2.innerText = "Remove";
+        td2.addEventListener("click", function () {
+          deleteData(index);
+        });
+
+        tr.append(td1, td2);
+        document.getElementById("body").append(tr);
+      });
+    }
+  }
+
+  function deleteData(index) {
+    assignmentData.splice(index, 1);
+    localStorage.setItem("assignmentDetails", JSON.stringify(assignmentData));
+    window.location.reload();
+  }
+
+  let addAssi = () => {
+    let ass = document.querySelector("#assi").value;
+    assignmentData.push(ass);
+    localStorage.setItem("assignmentDetails", JSON.stringify(assignmentData));
+  };
+
+  if (assignmentData != "") {
+    let ass = document.querySelector("#assi").value;
+    let assign = new Assignment(ass);
+    assign.append(assignmentData);
+  }
+
+  document.querySelector("form").addEventListener("submit", addAssi);
+</script>

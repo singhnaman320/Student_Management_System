@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #main {
+        display: none;
+      }
+      table {
+        border-collapse: collapse;
+        width: 70%;
+        margin: auto;
+        margin-top: 50px;
+      }
+      table,
+      th,
+      td {
+        margin: auto;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        font-size: 20px;
+      }
+      td {
+        text-align: center;
+        padding: 20px;
+      }
+      tr > td {
+        background-color: orangered;
+        color: white;
+      }
+      h1 {
+        text-align: center;
+      }
+      div #button {
+        margin-left: 72rem;
+        padding: 10px;
+        border: none;
+        background-color: black;
+        color: white;
+      }
+      h1{
+        font-family: Arial, Helvetica, sans-serif;
+        color: orangered;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><u>Student Data Page</u></h1>
+    <div>
+      <a href="studentEdit.html"><button id="button">Edit Data</button></a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <td>Student Name</td>
+          <td>Student Id</td>
+          <td> Assignment</td>
+          <td>Lectures</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+</html>
+
+<script>
+  let studentDetailsFromLs = JSON.parse(localStorage.getItem("userData"));
+  class studentData {
+    constructor() {
+      // this.name = name;
+      // this.stId = id;
+      // this.assignment = assignment;
+      // this.lecture = lecture;
+    }
+    append(data) {
+      data.forEach((el) => {
+        let tr = document.createElement("tr");
+
+        let name = document.createElement("td");
+        name.innerText = el.name;
+
+        let id = document.createElement("td");
+        id.innerText = el.studentId;
+
+        let assi = document.createElement("td");
+        assi.innerText = JSON.parse(localStorage.getItem("assignmentDetails"))||[];;
+
+        let lect = document.createElement("td");
+        lect.innerText = JSON.parse(localStorage.getItem("lectureDetails"))||[];;
+
+        tr.append(name, id, assi, lect);
+        console.log(tr);
+        document.querySelector("table > tbody").append(tr);
+      });
+    }
+  }
+  let stUser = new studentData();
+  stUser.append(studentDetailsFromLs);
+</script>
